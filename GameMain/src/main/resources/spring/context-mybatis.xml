@@ -15,11 +15,10 @@
 		<property name="mapperLocations" value="classpath*:garamlab/biz/**/dao/*.xml" />
 		-->
 
-   	<property name="mapperLocations">
-     	<list>
-	      <value>classpath*:manmul/**/dao/*.xml</value>
-			</list>
-   	</property>
+   		<property name="mapperLocations">
+   			<list>
+   				<value>classpath*:com/eastflag/game/**/dao/*.xml</value>
+   			</list>
+   		</property>
 	</bean>
-
 </beans>

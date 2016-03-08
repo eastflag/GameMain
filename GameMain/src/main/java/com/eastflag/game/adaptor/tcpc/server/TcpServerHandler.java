@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.eastflag.game.adaptor.tcpc.TcpServerAdaptor;
 import com.eastflag.game.adaptor.tcpc.message.RawMessage;
-import com.eastflag.game.core.message.TcpMessage;
+import com.eastflag.game.core.message.TcpCall;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -50,14 +50,14 @@ public class TcpServerHandler extends ChannelInboundHandlerAdapter {
 		
 		
 		// Call 을 만든다.
-		TcpMessage tcpMessage = makeTcpMessage(rawMsg);
+		TcpCall tcpMessage = makeTcpMessage(rawMsg);
 		
 		
 		// dispatch 한다.
 		adaptor.dispatchMessage(tcpMessage);
 	}
 
-	private TcpMessage makeTcpMessage(RawMessage rawMsg) {
+	private TcpCall makeTcpMessage(RawMessage rawMsg) {
 		// TODO Auto-generated method stub
 		return null;
 	}

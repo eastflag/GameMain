@@ -1,7 +1,13 @@
-package com.eastflag.game.adaptor.websocketc;
+package com.eastflag.game.adaptor.websocketc.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.eastflag.game.adaptor.websocketc.NettyHttpFileHandler;
+import com.eastflag.game.adaptor.websocketc.StockTickerMessageHandler;
+import com.eastflag.game.adaptor.websocketc.WebSocketMessageHandler;
+import com.eastflag.game.adaptor.websocketc.WebSocketServerAdaptor;
+import com.eastflag.game.core.message.WebSocketCall;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -21,13 +27,15 @@ public class StockTickerServerHandler extends SimpleChannelInboundHandler<Object
 	
 	private static final Logger logger = LoggerFactory.getLogger(StockTickerServerHandler.class.getName());
 	
+	private WebSocketServerAdaptor adaptor;
+	
 	protected WebSocketServerHandshaker handshaker;
 	private   StringBuilder frameBuffer = null;
 	protected WebSocketMessageHandler wsMessageHandler = new StockTickerMessageHandler();
 	protected NettyHttpFileHandler httpFileHandler = new NettyHttpFileHandler();
 	
-	public StockTickerServerHandler() {
-		// TODO Auto-generated constructor stub
+	public StockTickerServerHandler(WebSocketServerAdaptor adaptor) {
+		this.adaptor = adaptor;
 	}
 
 	@Override
@@ -73,6 +81,8 @@ public class StockTickerServerHandler extends SimpleChannelInboundHandler<Object
 			throw new UnsupportedOperationException(
 					String.format("%s frame types not supported", frame.getClass().getName()));
 		}
+		
+		
 
 		// Check if Text or Continuation Frame is final fragment and handle if
 		// needed.
@@ -83,10 +93,21 @@ public class StockTickerServerHandler extends SimpleChannelInboundHandler<Object
 	}
 
 	private void handleMessageCompleted(ChannelHandlerContext ctx, String frameText) {
-		String response = wsMessageHandler.handleMessage(ctx, frameText);
-		if (response != null) {
-			ctx.channel().writeAndFlush(new TextWebSocketFrame(response));
-		}
+//		String response = wsMessageHandler.handleMessage(ctx, frameText);
+//		if (response != null) {
+//			ctx.channel().writeAndFlush(new TextWebSocketFrame(response));
+//		}
+		
+		WebSocketCall call = makeWebSocketCall(frameText);
+		adaptor.dispatchCall(call);
+	}
+
+	private WebSocketCall makeWebSocketCall(String frameText) {
+		WebSocketCall call = new WebSocketCall();
+		
+		call.setReqMessage(frameText);
+		
+		return call;
 	}
 
 	private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) throws Exception {

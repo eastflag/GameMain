@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="org.mybatis.guice.ContactMapper">
-
-<!--     <resultMap type="org.mybatis.guice.Contact" id="contactMap"> -->
-<!--         <id column="id" property="id"/> -->
-<!--         <result column="first_name" property="firstName"/> -->
-<!--         <result column="last_name" property="lastName"/> -->
-<!--         <result column="created" property="created"/> -->
-<!--         <result column="address" property="address"/> -->
-<!--     </resultMap> -->
+<mapper namespace="UserMapper">
+	
+    <resultMap id="userResultMap" type="userVo">
+        <id column="id" property="id"/>
+        <result column="first_name" property="firstName"/>
+        <result column="last_name" property="lastName"/>
+        <result column="created" property="created"/>
+        <result column="address" property="address"/>
+    </resultMap>
 
 <!--     <insert id="brokenAdd" parameterType="org.mybatis.guice.Contact" useGeneratedKeys="true" keyProperty="id"> -->
 <!--         INSERT INTO -->
@@ -46,16 +46,19 @@
 <!--         </selectKey> -->
 <!--     </insert> -->
 
-<!--     <sql id="select"> -->
-<!--         SELECT -->
-<!--             id, -->
-<!--             first_name, -->
-<!--             last_name, -->
-<!--             created, -->
-<!--             address -->
-<!--         FROM -->
-<!--             contact -->
-<!--     </sql> -->
+    
+    <select id="selectUser" parameterType="dataMap" resultMap="userResultMap">
+    	SELECT
+            id,
+            first_name,
+            last_name,
+            created,
+            address
+        FROM
+            contact
+		WHERE
+			id = #{user_id}            
+    </select>
 
 <!--     <sql id="where"> -->
 <!--         WHERE -->

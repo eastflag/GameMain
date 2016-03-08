@@ -39,8 +39,16 @@
 <!-- 		</environment> -->
 <!-- 	</environments> -->
 
-	<mappers>
-		<mapper resource="sqlmap/ContactMapper.xml" />
-	</mappers>
+		<typeAliases>
+<!-- 		<typeAlias alias="paramMap" type="manmul.library.parameter.ParamMap" /> -->
+		<typeAlias alias="dataMap" type="com.eastflag.game.core.dao.DataMap" />
+		<typeAlias alias="userVo" type="com.eastflag.game.service.wordgame.vo.UserVo" />
+	</typeAliases>
+		
+		
+
+<!-- 	<mappers> -->
+<!-- 		<mapper resource="sqlmap/ContactMapper.xml" /> -->
+<!-- 	</mappers> -->
 
 </configuration>

@@ -4,11 +4,11 @@ import com.eastflag.game.core.message.Call;
 import com.eastflag.game.core.worker.TaskDistributor;
 
 public abstract class AbstractAdaptor {
-	private TaskDistributor worker;
+	private TaskDistributor taskDistributor;
 	
 	public abstract void activate();
 	
 	public void dispatch(Call call) {
-		worker.put(call);
+		taskDistributor.put(call);
 	}
 }

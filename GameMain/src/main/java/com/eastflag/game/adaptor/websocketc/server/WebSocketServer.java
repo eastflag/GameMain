@@ -1,7 +1,9 @@
-package com.eastflag.game.adaptor.websocketc;
+package com.eastflag.game.adaptor.websocketc.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.eastflag.game.adaptor.websocketc.WebSocketServerAdaptor;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -21,10 +23,13 @@ public class WebSocketServer {
 	private static final Logger logger = LoggerFactory.getLogger(WebSocketServer.class.getName());
 	private static final int PORT = Integer.parseInt(System.getProperty("port", "7777"));
 	
+	private WebSocketServerAdaptor adaptor;
 	private int bossgroupSize;
 	private int workergroupSize;
 
-	public WebSocketServer() {
+	public WebSocketServer(WebSocketServerAdaptor adaptor) {
+		this.adaptor = adaptor;
+		
 		bossgroupSize = 1;
 		workergroupSize = 10;
 	}
@@ -46,7 +51,7 @@ public class WebSocketServer {
 								p.addLast("encoder", new HttpResponseEncoder());
 								p.addLast("decoder", new HttpRequestDecoder());
 								p.addLast("aggregator", new HttpObjectAggregator(65536));
-								p.addLast("handler", new StockTickerServerHandler());
+								p.addLast("handler", new StockTickerServerHandler(adaptor));
 							}
 						});
 			
