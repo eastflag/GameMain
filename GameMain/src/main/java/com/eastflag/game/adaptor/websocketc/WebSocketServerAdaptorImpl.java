@@ -39,14 +39,14 @@ public class WebSocketServerAdaptorImpl extends AbstractAdaptor implements WebSo
 	}
 	
 	@Override
-	public void dispatchCall(Call call) {
-		try {
-			UserVo user = userDao.getUser("collme74");
-			logger.debug("## UserVo : " + user);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+	public void dispatchCall(Call call) throws Exception {
+//		try {
+//			UserVo user = userDao.getUser("collme74");
+//			logger.debug("## UserVo : " + user);
+//		}
+//		catch(Exception e) {
+//			e.printStackTrace();
+//		}
 		
 		
 		dispatch(call);
@@ -54,7 +54,7 @@ public class WebSocketServerAdaptorImpl extends AbstractAdaptor implements WebSo
 
 	@Override
 	public void respondMessage(Call call) {
-		// TODO Auto-generated method stub
+		
 	}
 	
 }

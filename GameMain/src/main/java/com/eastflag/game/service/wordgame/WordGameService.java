@@ -2,6 +2,7 @@ package com.eastflag.game.service.wordgame;
 
 import java.util.Map;
 
+import com.eastflag.game.adaptor.websocketc.WebSocketServerAdaptor;
 import com.eastflag.game.core.dao.CommonDao;
 import com.eastflag.game.core.dao.DataMap;
 import com.eastflag.game.core.message.Call;
@@ -19,6 +20,8 @@ public class WordGameService implements Service {
 	//private CommonRedis commonRedis;
 	
 	private UserDao userDao;
+	
+	private WebSocketServerAdaptor wssAdaptor;
 	
 	public WordGameService() {
 		super();
@@ -54,8 +57,12 @@ public class WordGameService implements Service {
 		UserVo user = userDao.getUser("collme74");
 		
 		
+		// 응답
+		wssAdaptor.respondMessage(call);
 		
-		return false;
+		
+		
+		return true;
 	}
 	
 	public String getServiceId() {

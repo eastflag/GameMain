@@ -39,15 +39,21 @@ public class StockTickerServerHandler extends SimpleChannelInboundHandler<Object
 	}
 
 	@Override
-	protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-		if (msg instanceof FullHttpRequest) {
-			this.handleHttpRequest(ctx, (FullHttpRequest)msg);
-		} else if (msg instanceof WebSocketFrame) {
-			this.handleWebSocketFrame(ctx, (WebSocketFrame)msg);
+	protected void channelRead0(ChannelHandlerContext ctx, Object msg) {
+		try {
+			if (msg instanceof FullHttpRequest) {
+				this.handleHttpRequest(ctx, (FullHttpRequest)msg);
+			}
+			else if (msg instanceof WebSocketFrame) {
+				this.handleWebSocketFrame(ctx, (WebSocketFrame)msg);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 
-	private void handleWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) {
+	private void handleWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) throws Exception {
 		logger.debug("Received incoming frame [{}]", frame.getClass().getName());
 		// Check for closing frame
 		if (frame instanceof CloseWebSocketFrame) {
@@ -92,7 +98,7 @@ public class StockTickerServerHandler extends SimpleChannelInboundHandler<Object
 		}
 	}
 
-	private void handleMessageCompleted(ChannelHandlerContext ctx, String frameText) {
+	private void handleMessageCompleted(ChannelHandlerContext ctx, String frameText) throws Exception {
 //		String response = wsMessageHandler.handleMessage(ctx, frameText);
 //		if (response != null) {
 //			ctx.channel().writeAndFlush(new TextWebSocketFrame(response));

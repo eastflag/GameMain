@@ -8,7 +8,7 @@ public abstract class AbstractAdaptor {
 	
 	public abstract void activate();
 	
-	public void dispatch(Call call) {
+	public void dispatch(Call call) throws Exception {
 		taskDistributor.put(call);
 	}
 }

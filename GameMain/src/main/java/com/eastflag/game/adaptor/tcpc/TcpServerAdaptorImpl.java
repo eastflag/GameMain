@@ -34,7 +34,7 @@ public class TcpServerAdaptorImpl extends AbstractAdaptor implements TcpServerAd
 		
 	}
 
-	public void dispatchMessage(Call call) {
+	public void dispatchMessage(Call call) throws Exception {
 		dispatch(call);
 	}
 	

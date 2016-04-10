@@ -21,11 +21,9 @@ public class CallTask implements Callable<Boolean> {
 	}
 
 	public Boolean call() throws Exception {
-		
-		
+		//
 		String serviceId = call.getServiceId();
 		Service service = serviceManager.getService(serviceId);
-		
 		
 		boolean result = service.excuteCall(call);
 		
