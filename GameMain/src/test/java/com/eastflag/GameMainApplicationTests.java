@@ -2,6 +2,9 @@ package com.eastflag;
 
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +12,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.eastflag.client.WebSocketClient;
 import com.eastflag.game.GameMainApplication;
-import com.eastflag.game.service.wordgame.vo.LoginRequestVO;
 import com.google.gson.Gson;
 
 import io.netty.channel.Channel;
@@ -44,13 +46,20 @@ public class GameMainApplicationTests {
 	public void auth_Login() {
 		// Make protocol
 		
-		LoginRequestVO loginReqVO = new LoginRequestVO();
-		loginReqVO.setId("collme74");
-		loginReqVO.setPassword("callme74");
+		Map<String, Object> request = new HashMap<String, Object>();
+		Map<String, String> reqData = new HashMap<String, String>();
+		request.put("req_data", reqData);
+		
+		request.put("cmd_type", "user_login_info");
+		request.put("msg_type", "request");
+
+		reqData.put("user_id", "collme74");
+		reqData.put("user_pwd", "collme74");
+		reqData.put("token", "abcdefg");
 		
 		Gson gson = new Gson();
 		
-		String json = gson.toJson(loginReqVO);
+		String json = gson.toJson(request);
 		
 		// Sends data line to the server.
 		Channel ch = client.getChannel();

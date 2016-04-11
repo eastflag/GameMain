@@ -26,12 +26,15 @@
 	<bean id="serviceManager" name="serviceManager" class="com.eastflag.game.core.service.ServiceManagerImpl" />
 	
 	<!-- Service -->
-	<bean id="" name="" class="com.eastflag.game.service.wordgame.WordGameService">
+	<bean id="" name="" class="com.eastflag.game.service.wordgame.WordGameService" >
+		<property name="serviceId" value="1000" />
 		<property name="userDao" ref="userDao" />
+		<property name="serviceManager" ref="serviceManager" />
+		<property name="webSocketServerAdaptor" ref="wssAdaptor" />
 	</bean>
 	
 	<!-- Task Distributor -->
-	<bean id="taskDistributor" name="taskDistributor" class="com.eastflag.game.core.worker.TaskDistributorImpl">
+	<bean id="taskDistributor" name="taskDistributor" class="com.eastflag.game.core.worker.TaskDistributorImpl" destroy-method="cleanup">
 		<property name="serviceManager" ref="serviceManager" />
 	</bean>
 	
@@ -40,11 +43,9 @@
 <!-- 		<property name="taskDistributor" ref="taskDistributor" /> -->
 <!-- 	</bean> -->
 	
-	<bean id="" name="" class="com.eastflag.game.adaptor.websocketc.WebSocketServerAdaptorImpl" init-method="activate">
+	<bean id="wssAdaptor" name="" class="com.eastflag.game.adaptor.websocketc.WebSocketServerAdaptorImpl" init-method="activate">
 		<property name="taskDistributor" ref="taskDistributor" />
-		<property name="userDao" ref="userDao" />
 	</bean>
-	
 	
 	    
 </beans>

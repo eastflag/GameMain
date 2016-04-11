@@ -4,5 +4,5 @@ import com.eastflag.game.core.message.Call;
 
 public interface Service {
 	public String getServiceId();
-	public boolean excuteCall(Call call);
+	public void excuteCall(Call call);
 }

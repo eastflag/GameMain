@@ -24,4 +24,10 @@ public class TcpCall implements Call {
 		
 	}
 
+	@Override
+	public void setServiceId(String serviceId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

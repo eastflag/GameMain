@@ -111,6 +111,7 @@ public class StockTickerServerHandler extends SimpleChannelInboundHandler<Object
 	private WebSocketCall makeWebSocketCall(String frameText) {
 		WebSocketCall call = new WebSocketCall();
 		
+		call.setServiceId("1000");
 		call.setReqMessage(frameText);
 		
 		return call;

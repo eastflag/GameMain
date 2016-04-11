@@ -11,14 +11,13 @@ import com.eastflag.game.service.wordgame.dao.UserDao;
 import com.eastflag.game.service.wordgame.vo.UserVo;
 
 public class WebSocketServerAdaptorImpl extends AbstractAdaptor implements WebSocketServerAdaptor {
-	private final Logger logger = LoggerFactory.getLogger(WebSocketServerAdaptorImpl.class.getName());
+	private final Logger logger = LoggerFactory.getLogger("COMMON_LOGGER");
 	
-	private TaskDistributor taskDistributor;
-	private UserDao userDao;
+	//private UserDao userDao;
 
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
+//	public void setUserDao(UserDao userDao) {
+//		this.userDao = userDao;
+//	}
 
 	public WebSocketServerAdaptorImpl() {
 		// TODO Auto-generated constructor stub
@@ -54,7 +53,7 @@ public class WebSocketServerAdaptorImpl extends AbstractAdaptor implements WebSo
 
 	@Override
 	public void respondMessage(Call call) {
-		
+		logger.debug("## Response...");
 	}
 	
 }

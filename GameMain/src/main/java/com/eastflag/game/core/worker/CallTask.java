@@ -25,9 +25,9 @@ public class CallTask implements Callable<Boolean> {
 		String serviceId = call.getServiceId();
 		Service service = serviceManager.getService(serviceId);
 		
-		boolean result = service.excuteCall(call);
+		service.excuteCall(call);
 		
-		return Boolean.valueOf(result);
+		return Boolean.valueOf(true);
 	}
 
 }

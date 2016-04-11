@@ -62,6 +62,9 @@ public class TaskDistributorImpl implements TaskDistributor {
 		this.serviceManager = serviceManager;
 	}
 	
+	public void cleanup() {
+		executorService.shutdownNow();
+	}
 	
 //	public void run() {
 //		
