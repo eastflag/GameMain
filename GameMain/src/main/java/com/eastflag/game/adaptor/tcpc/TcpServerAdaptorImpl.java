@@ -14,6 +14,8 @@ public class TcpServerAdaptorImpl extends AbstractAdaptor implements TcpServerAd
 	public TcpServerAdaptorImpl() {
 		// TODO Auto-generated constructor stub
 	}
+
+
 	
 	public TaskDistributor getTaskDistributor() {
 		return taskDistributor;
